@@ -1,3 +1,6 @@
+NUMBER_OF_FRETS = 12
+
+# Define the number of strings and the open pitch of each string. 1 is highest pitch.
 tuning = {
     1: 'e',
     2: 'b',
@@ -12,10 +15,10 @@ chromatic = chromatic.split(",")
 chromatic = chromatic * 5
 
 fretboard = {}
-for string in range(1, 7):
+for string in tuning.keys():
     open_string = tuning[string]
     chromatic_index = chromatic.index(open_string.lower())
-    for fret in range(13):
+    for fret in range(NUMBER_OF_FRETS + 1):  # Iteration 0 is the open string
         note = chromatic[chromatic_index]
         fretboard[f"{string}{fret}"] = note
         chromatic_index += 1
