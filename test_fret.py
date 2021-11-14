@@ -123,3 +123,14 @@ def test_more_than_9_strings_raises_error():
     }
     with raises(AssertionError):
         fm = create_fretboard_model(tuning, 12)
+
+def test_more_than_25_frets_raises_error():
+    """
+    Note: the total allowable number of frets is 25 - the open string (fret 0) plus 24 frets (frets 1 to 24)
+    """
+    tuning = {
+        1: "e",
+        2: "b",
+    }
+    with raises(AssertionError):
+        fm = create_fretboard_model(tuning, 26)
