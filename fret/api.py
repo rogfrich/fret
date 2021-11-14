@@ -3,7 +3,7 @@ from typing import List, Dict, Optional
 
 class Fretboard:
     def __init__(
-            self, tuning: Optional[dict] = None, number_of_frets: Optional[int] = None
+        self, tuning: Optional[dict] = None, number_of_frets: Optional[int] = None
     ):
         # Set defaults
         if not tuning:
@@ -20,7 +20,7 @@ class Fretboard:
 
         # We can't have more than 9 strings because the modelling uses one digit for string number.
         assert (
-                len(self.tuning) < 10
+            len(self.tuning) < 10
         ), f"The modelling only supports 9 stings or fewer. You have {len(self.tuning)}."
 
         if not number_of_frets:
@@ -30,7 +30,7 @@ class Fretboard:
 
         # We can't have more than 24 frets (plus the open string) due to the length of the generated chromatic scale.
         assert (
-                self.number_of_frets <= 25
+            self.number_of_frets <= 25
         ), f"The modelling  supports a maximum of 25 frets including the open string. You have {self.number_of_frets}."
 
         self.fretboard_model: dict = self._create_fretboard_model()
@@ -59,7 +59,7 @@ class Fretboard:
             open_string = self.tuning[string]
             chromatic_index = chromatic_scale.index(open_string.lower())
             for fret in range(
-                    self.number_of_frets + 1
+                self.number_of_frets + 1
             ):  # Iteration 0 is the open string
                 note = chromatic_scale[chromatic_index]
                 fretboard_model_index = f"{string}{fret}"
