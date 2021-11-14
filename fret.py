@@ -21,6 +21,9 @@ def generate_chromatic_scale() -> List:
 
 
 def create_fretboard_model(tuning: Dict, NUMBER_OF_FRETS: int) -> Dict:
+    """
+    Return a dict that represents the fretboard. Dict keys are numeric strings. The first character is always the string number with 1 being highest pitched. The next one or two characters are the fret number, with 0 being the open string.
+    """
     chromatic_scale = generate_chromatic_scale()
     fretboard = {}
     for string in tuning.keys():
