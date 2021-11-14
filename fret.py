@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 
 NUMBER_OF_FRETS = 12
 
@@ -6,10 +6,10 @@ NUMBER_OF_FRETS = 12
 tuning = {
     1: 'e',
     2: 'b',
-    3: 'g',
-    4: 'd',
-    5: 'a',
-    6: 'e',
+    # 3: 'g',
+    # 4: 'd',
+    # 5: 'a',
+    # 6: 'e',
 }
 def generate_chromatic_scale() -> List:
     """
@@ -19,16 +19,21 @@ def generate_chromatic_scale() -> List:
     chromatic = chromatic.split(",")
     return chromatic * 3
 
-chromatic_scale = generate_chromatic_scale()
-fretboard = {}
-for string in tuning.keys():
-    open_string = tuning[string]
-    chromatic_index = chromatic_scale.index(open_string.lower())
-    for fret in range(NUMBER_OF_FRETS + 1):  # Iteration 0 is the open string
-        note = chromatic_scale[chromatic_index]
-        fretboard[f"{string}{fret}"] = note
-        chromatic_index += 1
 
+def create_fretboard_model(tuning, NUMBER_OF_FRETS) -> Dict:
+    chromatic_scale = generate_chromatic_scale()
+    fretboard = {}
+    for string in tuning.keys():
+        open_string = tuning[string]
+        chromatic_index = chromatic_scale.index(open_string.lower())
+        for fret in range(NUMBER_OF_FRETS + 1):  # Iteration 0 is the open string
+            note = chromatic_scale[chromatic_index]
+            fretboard[f"{string}{fret}"] = note
+            chromatic_index += 1
+
+    return fretboard
+
+fretboard = create_fretboard_model(tuning, NUMBER_OF_FRETS)
 for k, v in fretboard.items():
     print(k, v)
 
@@ -38,3 +43,6 @@ first_five_frets = {k: v for (k, v) in fretboard.items() if int(k[1:]) < 6}
 print()
 for k, v in first_five_frets.items():
     print(k, v)
+
+fm = create_fretboard_model(tuning, 3)
+print(fm)
