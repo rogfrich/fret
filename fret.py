@@ -37,7 +37,9 @@ def create_fretboard_model(tuning: Dict, NUMBER_OF_FRETS: int) -> Dict:
     ), f"The modelling only supports 9 stings or fewer. You have {len(tuning)}."
 
     # We can't have more than 24 frets (plus the open string) due to the length of the generated chromatic scale.
-    assert(NUMBER_OF_FRETS <= 25), f"The modelling  supports a maximum of 25 frets including the open string. You have {NUMBER_OF_FRETS}."
+    assert (
+        NUMBER_OF_FRETS <= 25
+    ), f"The modelling  supports a maximum of 25 frets including the open string. You have {NUMBER_OF_FRETS}."
 
     chromatic_scale = generate_chromatic_scale()
     fretboard = {}

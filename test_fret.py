@@ -124,7 +124,8 @@ def test_more_than_9_strings_raises_error():
     with raises(AssertionError):
         fm = create_fretboard_model(tuning, 12)
 
-def test_more_than_25_frets_raises_error():
+
+def test_checks_for_number_of_frets():
     """
     Note: the total allowable number of frets is 25 - the open string (fret 0) plus 24 frets (frets 1 to 24)
     """
@@ -132,5 +133,7 @@ def test_more_than_25_frets_raises_error():
         1: "e",
         2: "b",
     }
+    fm_ok = create_fretboard_model(tuning, 25)  # Shouldn't raise exception
+
     with raises(AssertionError):
-        fm = create_fretboard_model(tuning, 26)
+        fm = create_fretboard_model(tuning, 26)  # Should raise exception
