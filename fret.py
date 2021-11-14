@@ -15,11 +15,13 @@ tuning: Dict = {
 
 def generate_chromatic_scale() -> List:
     """
-    Return a list that represents the chromatic scale over three octaves. All enharmonic notes are shown as sharps.
+    Return a list that represents the chromatic scale over a configurable number of octaves. All enharmonic notes are
+    shown as sharps.
     """
+    number_of_octaves = 3
     chromatic = "a,a#,b,c,c#,d,d#,e,f,f#,g,g#"
     chromatic = chromatic.split(",")
-    return chromatic * 3
+    return chromatic * number_of_octaves
 
 
 def create_fretboard_model(tuning: Dict, NUMBER_OF_FRETS: int) -> Dict:
