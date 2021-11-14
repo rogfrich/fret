@@ -2,7 +2,9 @@ from typing import List, Dict, Optional
 
 
 class Fretboard:
-    def __init__(self, tuning: Optional[dict] = None, number_of_frets: Optional[int] = None):
+    def __init__(
+            self, tuning: Optional[dict] = None, number_of_frets: Optional[int] = None
+    ):
         # Set defaults
         if not tuning:
             self.tuning = {
@@ -31,7 +33,7 @@ class Fretboard:
                 self.number_of_frets <= 25
         ), f"The modelling  supports a maximum of 25 frets including the open string. You have {self.number_of_frets}."
 
-        self.fretboard_model = self._create_fretboard_model()
+        self.fretboard_model: dict = self._create_fretboard_model()
 
     def _generate_chromatic_scale(self) -> List:
         """
@@ -51,12 +53,14 @@ class Fretboard:
         number, with 0 being the open string.
         """
 
-        chromatic_scale = self._generate_chromatic_scale()
-        fretboard_model = {}
+        chromatic_scale: List = self._generate_chromatic_scale()
+        fretboard_model: Dict = {}
         for string in self.tuning.keys():
             open_string = self.tuning[string]
             chromatic_index = chromatic_scale.index(open_string.lower())
-            for fret in range(self.number_of_frets + 1):  # Iteration 0 is the open string
+            for fret in range(
+                    self.number_of_frets + 1
+            ):  # Iteration 0 is the open string
                 note = chromatic_scale[chromatic_index]
                 fretboard_model_index = f"{string}{fret}"
                 fretboard_model[fretboard_model_index] = note
@@ -64,7 +68,7 @@ class Fretboard:
 
         return fretboard_model
 
-    def create_fretboard_model_subset(self, start_fret, end_fret) -> Dict:
+    def create_fretboard_model_subset(self, start_fret: int, end_fret: int) -> Dict:
         """
         Return a dict that represents a "vertical slice" of the fretboard model - all the strings, but only the frets between
         start_fret and end_fret (inclusive).
