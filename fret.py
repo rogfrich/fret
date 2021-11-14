@@ -4,13 +4,15 @@ NUMBER_OF_FRETS: int = 12
 
 # Define the number of strings and the open pitch of each string. 1 is highest pitch.
 tuning: Dict = {
-    1: 'e',
-    2: 'b',
-    3: 'g',
-    4: 'd',
-    5: 'a',
-    6: 'e',
+    1: "e",
+    2: "b",
+    3: "g",
+    4: "d",
+    5: "a",
+    6: "e",
 }
+
+
 def generate_chromatic_scale() -> List:
     """
     Return a list that represents the chromatic scale over three octaves. All enharmonic notes are shown as sharps.
@@ -22,7 +24,8 @@ def generate_chromatic_scale() -> List:
 
 def create_fretboard_model(tuning: Dict, NUMBER_OF_FRETS: int) -> Dict:
     """
-    Return a dict that represents the fretboard. Dict keys are numeric strings. The first character is always the string number with 1 being highest pitched. The next one or two characters are the fret number, with 0 being the open string.
+    Return a dict that represents the fretboard. Dict keys are numeric strings. The first character is always the string
+    number with 1 being highest pitched. The next one or two characters are the fret number, with 0 being the open string.
     """
     chromatic_scale = generate_chromatic_scale()
     fretboard = {}
@@ -35,6 +38,7 @@ def create_fretboard_model(tuning: Dict, NUMBER_OF_FRETS: int) -> Dict:
             chromatic_index += 1
 
     return fretboard
+
 
 fretboard = create_fretboard_model(tuning, NUMBER_OF_FRETS)
 for k, v in fretboard.items():
