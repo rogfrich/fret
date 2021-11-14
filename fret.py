@@ -1,8 +1,9 @@
-from typing import List, Dict
+from typing import List, Dict, Tuple
 
 NUMBER_OF_FRETS: int = 12
 
-# Define the number of strings and the open pitch of each string. 1 is highest pitch.
+# Define the number of strings and the open pitch of each string. 1 is highest pitch. Can't have more than 9 strings
+# because the modelling uses one digit for string number.
 tuning: Dict = {
     1: "e",
     2: "b",
@@ -11,6 +12,7 @@ tuning: Dict = {
     5: "a",
     6: "e",
 }
+assert len(tuning) < 10
 
 
 def generate_chromatic_scale() -> List:
@@ -42,13 +44,38 @@ def create_fretboard_model(tuning: Dict, NUMBER_OF_FRETS: int) -> Dict:
     return fretboard
 
 
-fretboard = create_fretboard_model(tuning, NUMBER_OF_FRETS)
-for k, v in fretboard.items():
-    print(k, v)
+def create_fretboard_model_subset(fretboard_model, start_fret, end_fret) -> Dict:
+    """
+    Return a dict that represents a "vertical slice" of the fretboard model - all the strings, but only the frets between
+    start_fret and end_fret (inclusive).
+    """
+    subset = {
+        index: note
+        for (index, note) in fretboard_model.items()
+        if start_fret <= int(get_fret_from_index(index)) <= end_fret
+    }
 
-first_five_frets = {k: v for (k, v) in fretboard.items() if int(k[1:]) < 6}
-# could make this more readable if we had a function to return the fret number from the dict index: ...if get_fret_from_index(index) < 6
+    return subset
 
-print()
-for k, v in first_five_frets.items():
-    print(k, v)
+
+def get_fret_from_index(index: str) -> str:
+    """
+    Returns the fret number from a give index. Assumes that the
+    modelled fretboard has fewer than 10 strings
+    """
+    return index[1:]
+
+
+fm = create_fretboard_model(tuning, NUMBER_OF_FRETS)
+# for k, v in fretboard.items():
+#     print(k, v)
+
+# first_five_frets = {k: v for (k, v) in fretboard.items() if int(k[1:]) < 6}
+# # could make this more readable if we had a function to return the fret number from the dict index: ...if get_fret_from_index(index) < 6
+#
+# print()
+# for k, v in first_five_frets.items():
+#     print(k, v)
+
+s = create_fretboard_model_subset(fm, 0, 3)
+print(s)
