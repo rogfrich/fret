@@ -64,18 +64,3 @@ def get_fret_from_index(index: str) -> str:
     modelled fretboard has fewer than 10 strings
     """
     return index[1:]
-
-
-fm = create_fretboard_model(tuning, NUMBER_OF_FRETS)
-# for k, v in fretboard.items():
-#     print(k, v)
-
-# first_five_frets = {k: v for (k, v) in fretboard.items() if int(k[1:]) < 6}
-# # could make this more readable if we had a function to return the fret number from the dict index: ...if get_fret_from_index(index) < 6
-#
-# print()
-# for k, v in first_five_frets.items():
-#     print(k, v)
-
-s = create_fretboard_model_subset(fm, 0, 3)
-print(s)
