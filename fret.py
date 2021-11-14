@@ -6,10 +6,10 @@ NUMBER_OF_FRETS = 12
 tuning = {
     1: 'e',
     2: 'b',
-    # 3: 'g',
-    # 4: 'd',
-    # 5: 'a',
-    # 6: 'e',
+    3: 'g',
+    4: 'd',
+    5: 'a',
+    6: 'e',
 }
 def generate_chromatic_scale() -> List:
     """
@@ -43,6 +43,3 @@ first_five_frets = {k: v for (k, v) in fretboard.items() if int(k[1:]) < 6}
 print()
 for k, v in first_five_frets.items():
     print(k, v)
-
-fm = create_fretboard_model(tuning, 3)
-print(fm)
