@@ -1,9 +1,9 @@
 from typing import List, Dict, Tuple
 
+
 NUMBER_OF_FRETS: int = 12
 
-# Define the number of strings and the open pitch of each string. 1 is highest pitch. Can't have more than 9 strings
-# because the modelling uses one digit for string number.
+# Define the number of strings and the open pitch of each string. 1 is highest pitch.
 tuning: Dict = {
     1: "e",
     2: "b",
@@ -12,7 +12,6 @@ tuning: Dict = {
     5: "a",
     6: "e",
 }
-assert len(tuning) < 10
 
 
 def generate_chromatic_scale() -> List:
@@ -31,6 +30,12 @@ def create_fretboard_model(tuning: Dict, NUMBER_OF_FRETS: int) -> Dict:
     Return a dict that represents the fretboard. Dict keys are numeric strings. The first character is always the string
     number with 1 being highest pitched. The next one or two characters are the fret number, with 0 being the open string.
     """
+
+    # We can't have more than 9 strings because the modelling uses one digit for string number.
+    assert (
+        len(tuning) < 10
+    ), f"The modelling only supports 9 stings or fewer. You have {len(tuning)}."
+
     chromatic_scale = generate_chromatic_scale()
     fretboard = {}
     for string in tuning.keys():

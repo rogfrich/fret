@@ -1,3 +1,4 @@
+from pytest import raises
 from fret import (
     generate_chromatic_scale,
     create_fretboard_model,
@@ -103,3 +104,22 @@ def test_create_fretboard_model_subset():
         "63": "g",
     }
     assert subset == correct_subset
+
+
+def test_more_than_9_strings_raises_error():
+    tuning = {
+        1: "e",
+        2: "b",
+        3: "g",
+        4: "d",
+        5: "a",
+        6: "e",
+        7: "e",
+        8: "b",
+        9: "g",
+        10: "d",
+        11: "a",
+        12: "e",
+    }
+    with raises(AssertionError):
+        fm = create_fretboard_model(tuning, 12)
