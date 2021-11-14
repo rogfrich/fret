@@ -83,7 +83,7 @@ class Fretboard:
 
     def _get_fret_from_index(self, index: str) -> str:
         """
-        Returns the fret number from a give index. Assumes that the
+        Returns the fret number from a given index. Assumes that the
         modelled fretboard has fewer than 10 strings
         """
         return index[1:]
