@@ -1,9 +1,9 @@
 from typing import List, Dict
 
-NUMBER_OF_FRETS = 12
+NUMBER_OF_FRETS: int = 12
 
 # Define the number of strings and the open pitch of each string. 1 is highest pitch.
-tuning = {
+tuning: Dict = {
     1: 'e',
     2: 'b',
     3: 'g',
@@ -20,7 +20,7 @@ def generate_chromatic_scale() -> List:
     return chromatic * 3
 
 
-def create_fretboard_model(tuning, NUMBER_OF_FRETS) -> Dict:
+def create_fretboard_model(tuning: Dict, NUMBER_OF_FRETS: int) -> Dict:
     chromatic_scale = generate_chromatic_scale()
     fretboard = {}
     for string in tuning.keys():
