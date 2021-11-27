@@ -1,30 +1,27 @@
 from typing import List
 from definitions import scale_definitions
-from fret.fret import Fretboard
+from generate_chromatic import cs
 
 
 class Scale:
-    def __init__(self, scale_type, root):
+    def __init__(self, scale_type: str, root: str):
         self.root = root.lower()
         self.name = f"{self.root.upper()} {scale_type} scale"
-
         self.scale_definition = scale_definitions[scale_type]
+        self.chromatic_scale_starting_at_root = cs(self.root)
+        self.notes_in_scale = self._get_notes_in_scale()
 
-        # Generate a generate_chromatic scale. Currently the code to do this is in the Fretboard class.
-        # This should be extracted and put elsewhere as it is needed in more than one place.
-        # To be clear, we're only calling Fretboard() until that refactor is done.
-
-        fretboard_model = Fretboard()
-        self.chromatic_scale = fretboard_model._set_chromatic_scale()
-        chromatic_index = self.chromatic_scale.index(self.root)
-        self.chromatic_scale_starting_at_root = self.chromatic_scale[chromatic_index:]
-
-
-        self.notes = self._get_notes_in_scale()
-
-    def _get_notes_in_scale(self):
+    def _get_notes_in_scale(self) -> List:
+        """
+        Works out the notes in the required scale by applying the scale definition to the chromatic scale in the root
+        key.
+        """
         notes_in_scale = [
-            x for x in self.chromatic_scale_starting_at_root
+            x
+            for x in self.chromatic_scale_starting_at_root
             if self.chromatic_scale_starting_at_root.index(x) in self.scale_definition
         ]
-        self.notes_in_scale = notes_in_scale[:len(self.scale_definition)]
+        return notes_in_scale[: len(self.scale_definition)]
+
+    def __str__(self):
+        return self.name

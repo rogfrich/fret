@@ -1,6 +1,7 @@
 from typing import List, Dict, Optional
 from generate_chromatic import cs
 
+
 class Fretboard:
     def __init__(
         self, tuning: Optional[dict] = None, number_of_frets: Optional[int] = None
@@ -33,9 +34,8 @@ class Fretboard:
             self.number_of_frets <= 25
         ), f"The modelling  supports a maximum of 25 frets including the open string. You have {self.number_of_frets}."
 
-        self.chromatic_scale = cs('a')
+        self.chromatic_scale = cs("a")
         self.fretboard_model: dict = self._create_fretboard_model()
-
 
     def _create_fretboard_model(self) -> dict:
         """
