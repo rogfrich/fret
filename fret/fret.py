@@ -1,5 +1,5 @@
 from typing import List, Dict, Optional
-
+from generate_chromatic import cs
 
 class Fretboard:
     def __init__(
@@ -28,23 +28,14 @@ class Fretboard:
         else:
             self.number_of_frets = number_of_frets
 
-        # We can't have more than 24 frets (plus the open string) due to the length of the generated chromatic scale.
+        # We can't have more than 24 frets (plus the open string) due to the length of the generated generate_chromatic scale.
         assert (
             self.number_of_frets <= 25
         ), f"The modelling  supports a maximum of 25 frets including the open string. You have {self.number_of_frets}."
 
+        self.chromatic_scale = cs('a')
         self.fretboard_model: dict = self._create_fretboard_model()
 
-    def _generate_chromatic_scale(self) -> List:
-        """
-        Return a list that represents the chromatic scale over a configurable number of octaves. All enharmonic notes are
-        shown as sharps.
-        """
-        number_of_octaves = 3
-        chromatic = "a,a#,b,c,c#,d,d#,e,f,f#,g,g#"
-        chromatic = chromatic.split(",")
-
-        return chromatic * number_of_octaves
 
     def _create_fretboard_model(self) -> dict:
         """
@@ -53,15 +44,14 @@ class Fretboard:
         number, with 0 being the open string.
         """
 
-        chromatic_scale: List = self._generate_chromatic_scale()
         fretboard_model: Dict = {}
         for string in self.tuning.keys():
             open_string = self.tuning[string]
-            chromatic_index = chromatic_scale.index(open_string.lower())
+            chromatic_index = self.chromatic_scale.index(open_string.lower())
             for fret in range(
                 self.number_of_frets + 1
             ):  # Iteration 0 is the open string
-                note = chromatic_scale[chromatic_index]
+                note = self.chromatic_scale[chromatic_index]
                 fretboard_model_index = f"{string}{fret}"
                 fretboard_model[fretboard_model_index] = note
                 chromatic_index += 1

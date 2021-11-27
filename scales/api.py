@@ -1,6 +1,6 @@
 from typing import List
 from definitions import scale_definitions
-from fret.api import Fretboard
+from fret.fret import Fretboard
 
 
 class Scale:
@@ -10,12 +10,12 @@ class Scale:
 
         self.scale_definition = scale_definitions[scale_type]
 
-        # Generate a chromatic scale. Currently the code to do this is in the Fretboard class.
+        # Generate a generate_chromatic scale. Currently the code to do this is in the Fretboard class.
         # This should be extracted and put elsewhere as it is needed in more than one place.
         # To be clear, we're only calling Fretboard() until that refactor is done.
 
         fretboard_model = Fretboard()
-        self.chromatic_scale = fretboard_model._generate_chromatic_scale()
+        self.chromatic_scale = fretboard_model._set_chromatic_scale()
         chromatic_index = self.chromatic_scale.index(self.root)
         self.chromatic_scale_starting_at_root = self.chromatic_scale[chromatic_index:]
 
