@@ -2,49 +2,6 @@ from pytest import raises
 from fret import Fretboard as fb
 
 
-def test_generate_chromatic_scale():
-    fbm = fb()
-    cs = fbm._generate_chromatic_scale()
-    assert cs == [
-        "a",
-        "a#",
-        "b",
-        "c",
-        "c#",
-        "d",
-        "d#",
-        "e",
-        "f",
-        "f#",
-        "g",
-        "g#",
-        "a",
-        "a#",
-        "b",
-        "c",
-        "c#",
-        "d",
-        "d#",
-        "e",
-        "f",
-        "f#",
-        "g",
-        "g#",
-        "a",
-        "a#",
-        "b",
-        "c",
-        "c#",
-        "d",
-        "d#",
-        "e",
-        "f",
-        "f#",
-        "g",
-        "g#",
-    ]
-
-
 def test_create_create_fretboard_model_with_default_settings():
     fm = fb()
     assert fm.fretboard_model == {
