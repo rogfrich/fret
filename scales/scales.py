@@ -1,5 +1,5 @@
 from typing import List
-from definitions import scale_definitions
+from .definitions import scale_definitions
 from generate_chromatic import cs
 
 
